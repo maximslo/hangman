@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">HangmanHW3</string>
+    <string name="newGame">New Game</string>
+
+    <string-array name="wordBank">
+        <item>laptop,tech</item>
+        <item>apple,android</item>
+        <item>fork,utensil</item>
+        <item>flower,nature</item>
+        <item>garden,flowers</item>
+        <item>mountain,climb</item>
+        <item>playground,recess</item>
+        <item>window,glass</item>
+        <item>fireplace,burning</item>
+    </string-array>
 </resources>
