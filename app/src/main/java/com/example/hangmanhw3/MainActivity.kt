@@ -32,5 +32,31 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val GUESSING_WORD_KEY = "GUESSING_WORD_KEY"
     }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
+        hangmanProgress = findViewById(R.id.hangmanPicture)
+        guessingWord = findViewById(R.id.guessingWord)
+        currPair = resources.getStringArray(R.array.wordBank).random()
+        currList = currPair.split(",")
+        currWord = currList[0]
+        currHint = currList[1]
+        hintState = 0
+        newGameButton = findViewById(R.id.newGameButton)
+        hintButton = findViewById(R.id.hintButton)
+        hintText = findViewById(R.id.hintText)
+
+        newGameButton.setOnClickListener(){
+            newGame()
+        }
+
+        if (savedInstanceState != null) {
+            currWord = savedInstanceState.getString("currWord", "")
+            numGuesses = savedInstanceState.getInt("numGuesses", 0)
+        } else {
+            newGame()
+        }
+        getAllButtons()
+    }
 }
