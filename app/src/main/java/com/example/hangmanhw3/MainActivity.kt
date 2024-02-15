@@ -98,4 +98,17 @@ class MainActivity : AppCompatActivity() {
             button.setBackgroundColor(Color.parseColor("#c6cfc8"))
         }
     }
+    private fun youLost(view: View) {
+        disableAll()
+        val snackbar = Snackbar.make(view,
+            "You lost :( Click to start a new game",
+            Snackbar.LENGTH_INDEFINITE
+        )
+        snackbar.setAction("New Game") {
+            newGame()
+            snackbar.dismiss()
+        }
+        snackbar.show()
+        //should disable all buttons so no more guesses are able to be made
+    }
 }
