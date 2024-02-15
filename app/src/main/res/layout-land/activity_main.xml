@@ -1,6 +1,486 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lButton"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/newGameButton"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="61dp"
+        android:backgroundTint="#42474f"
+        android:text="@string/newGame"
+        android:textSize="26dp"
+        app:cornerRadius="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/hangmanPicture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/keyboard"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="#000000"
+        app:strokeWidth="1dp" />
+
+    <ImageView
+        android:id="@+id/hangmanPicture"
+        android:layout_width="313dp"
+        android:layout_height="229dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginBottom="2dp"
+        android:src="@drawable/state0"
+        app:layout_constraintBottom_toTopOf="@+id/guessingWord"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/keyboard"
+        app:layout_constraintTop_toBottomOf="@+id/newGameButton" />
+
+    <TextView
+        android:id="@+id/guessingWord"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="54dp"
+        android:gravity="center"
+        android:text="_ _ _ _ _ _"
+        android:textColor="@color/black"
+        android:textSize="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/keyboard"
+        app:layout_constraintTop_toBottomOf="@+id/hangmanPicture" />
+
+    <TextView
+        android:id="@+id/chooseLetterText"
+        android:layout_width="394dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="77dp"
+        android:layout_marginBottom="3dp"
+        android:gravity="center"
+        android:text="CHOOSE A LETTER"
+        android:textColor="@color/black"
+        android:textSize="34dp"
+        app:layout_constraintBottom_toTopOf="@+id/keyboard"
+        app:layout_constraintEnd_toStartOf="@+id/newGameButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/hintButton"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="25dp"
+        android:backgroundTint="#42474f"
+        android:text="Hint"
+        android:textSize="26dp"
+        app:cornerRadius="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/hintText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/keyboard"
+        app:strokeColor="#000000"
+        app:strokeWidth="1dp"
+        android:onClick="hintClick"/>
+
+    <TextView
+        android:id="@+id/hintText"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="19dp"
+        android:text="Hint: "
+        android:textColor="@color/black"
+        android:textSize="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guessingWord"
+        app:layout_constraintStart_toEndOf="@+id/hintButton"
+        app:layout_constraintTop_toBottomOf="@+id/keyboard" />
+
+    <LinearLayout
+        android:id="@+id/keyboard"
+        android:layout_width="413dp"
+        android:layout_height="261dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="8dp"
+        android:background="#96bfff"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/hintButton"
+        app:layout_constraintEnd_toStartOf="@+id/hangmanPicture"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseLetterText">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/aButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:backgroundTint="#42474f"
+                android:text="A"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#42474f"
+                android:text="B"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#42474f"
+                android:text="C"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#42474f"
+                android:text="D"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/eButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#42474f"
+                android:text="E"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/fButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#42474f"
+                android:text="F"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/gButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:backgroundTint="#42474f"
+                android:text="G"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/hButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#42474f"
+                android:text="H"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/iButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#42474f"
+                android:text="I"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/jButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#42474f"
+                android:text="J"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/kButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#42474f"
+                android:text="K"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#42474f"
+                android:text="L"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/mButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:backgroundTint="#42474f"
+                android:text="M"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/nButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#42474f"
+                android:text="N"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/oButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#42474f"
+                android:text="O"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/pButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#42474f"
+                android:text="P"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/qButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#42474f"
+                android:text="Q"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/rButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#42474f"
+                android:text="R"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:backgroundTint="#42474f"
+                android:text="S"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#42474f"
+                android:text="T"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/uButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#42474f"
+                android:text="U"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/vButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#42474f"
+                android:text="V"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/wButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#42474f"
+                android:padding="2dp"
+                android:text="W"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/xButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#42474f"
+                android:text="X"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/yButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:backgroundTint="#42474f"
+                android:text="Y"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/zButton"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#42474f"
+                android:text="Z"
+                android:textSize="18dp"
+                app:cornerRadius="5dp"
+                app:strokeColor="#000000"
+                app:strokeWidth="1dp"
+                android:onClick="letterClick"/>
+        </LinearLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
