@@ -67,4 +67,10 @@ class MainActivity : AppCompatActivity() {
         currHint = currList[1]
         hintState = 0
         numGuesses = 0
+        hintText.text = "Hint:"
+        newGameButton.isEnabled = true
+        underscoreWord()
+        resetButtons()
+    }
+
 }
