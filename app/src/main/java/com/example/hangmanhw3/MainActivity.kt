@@ -121,4 +121,45 @@ class MainActivity : AppCompatActivity() {
             youLost(findViewById(android.R.id.content))
         }
     }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("currWord", currWord)
+        outState.putInt("numGuesses", numGuesses)
+        outState.putString("GUESSING_WORD_KEY", guessingWord.text.toString())
+        outState.putString("currHint", currHint)
+        outState.putInt("hintState", hintState)
+        allLetters.forEachIndexed { index, button ->
+            outState.putBoolean("button$index", button.isEnabled)
+        }
+    }
+
+    @SuppressLint("DiscouragedApi")
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        currWord = savedInstanceState.getString("currWord", "")
+        numGuesses = savedInstanceState.getInt("numGuesses", 0)
+        guessingWord.text = savedInstanceState.getString(GUESSING_WORD_KEY, "")
+        currHint = savedInstanceState.getString("currHint", "")
+        hintState = savedInstanceState.getInt("hintState", 0)
+        if(hintState == 0){
+            hintText.text = "Hint:"
+        }
+        else if(hintState == 1 || hintState == 2){
+            hintText.text = currHint
+        }
+        else {
+            hintText.text = "vowel hint!"
+        }
+        val currentState = "state$numGuesses"
+        hangmanProgress.setImageResource(resources.getIdentifier(currentState, "drawable", packageName))
+        allLetters.forEachIndexed { index, button ->
+            button.isEnabled = savedInstanceState.getBoolean("button$index")
+            if (button.isEnabled) {
+                button.setBackgroundColor(Color.parseColor("#42474f"))
+            } else {
+                button.setBackgroundColor(Color.parseColor("#c6cfc8"))
+            }
+        }
+    }
+
 }
