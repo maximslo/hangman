@@ -72,5 +72,21 @@ class MainActivity : AppCompatActivity() {
         underscoreWord()
         resetButtons()
     }
+    private fun getAllButtons() {
+        val keyboardGroup: LinearLayout = findViewById(R.id.keyboard)
 
+        for (i in 0 until keyboardGroup.childCount) {
+            val child: View? = keyboardGroup.getChildAt(i)
+
+            if (child is ViewGroup) {
+                for (j in 0 until child.childCount) {
+                    val innerChild: View? = child.getChildAt(j)
+
+                    if (innerChild is Button) {
+                        allLetters.add(innerChild)
+                    }
+                }
+            }
+        }
+    }
 }
