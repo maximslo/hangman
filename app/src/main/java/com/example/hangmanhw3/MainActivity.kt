@@ -59,4 +59,12 @@ class MainActivity : AppCompatActivity() {
         }
         getAllButtons()
     }
+    private fun newGame() {
+        hangmanProgress.setImageResource(R.drawable.state0)
+        currPair = resources.getStringArray(R.array.wordBank).random()
+        currList = currPair.split(",")
+        currWord = currList[0]
+        currHint = currList[1]
+        hintState = 0
+        numGuesses = 0
 }
