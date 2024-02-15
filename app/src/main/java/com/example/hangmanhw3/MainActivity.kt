@@ -89,4 +89,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+    private fun disableAll() {
+        val newGame: MaterialButton = findViewById(R.id.newGameButton)
+        newGame.isEnabled = false
+        val keyboardGroup: LinearLayout = findViewById(R.id.keyboard)
+        allLetters.forEach { button ->
+            button.isEnabled = false
+            button.setBackgroundColor(Color.parseColor("#c6cfc8"))
+        }
+    }
 }
