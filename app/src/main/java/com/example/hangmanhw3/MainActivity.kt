@@ -109,6 +109,16 @@ class MainActivity : AppCompatActivity() {
             snackbar.dismiss()
         }
         snackbar.show()
-        //should disable all buttons so no more guesses are able to be made
+    }
+
+    @SuppressLint("DiscouragedApi")
+    private fun wrongLetter() {
+        numGuesses += 1
+        val curState = "state$numGuesses"
+        val resourceId = resources.getIdentifier(curState, "drawable", packageName)
+        hangmanProgress.setImageResource(resourceId)
+        if(numGuesses > 6) {
+            youLost(findViewById(android.R.id.content))
+        }
     }
 }
