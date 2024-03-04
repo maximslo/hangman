@@ -195,20 +195,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-    /*private fun checkWin(){
-        val trimmedWord = guessingWord.text.toString().replace(" ", "")
-        if(trimmedWord.equals(currWord, ignoreCase = true)){
-            disableAll()
-            val snackbar = Snackbar.make(findViewById(android.R.id.content), "Nice win! Start a new game?", Snackbar.LENGTH_INDEFINITE)
-            snackbar.setAction("New Game") {
-                newGame()
-                snackbar.dismiss()
-            }
-            snackbar.show()
-        }
-    }*/
-
     fun onHintButtonClick(view: View) {
         if (incorrectGuesses == 6 && hintUsageStatus >= 1) {
             Snackbar.make(view, "No hints available", Snackbar.LENGTH_LONG).show()
