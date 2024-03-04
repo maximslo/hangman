@@ -72,7 +72,6 @@ class MainActivity : AppCompatActivity() {
         startNewGameButton.isEnabled = true
         displayWordWithUnderscores()
         reinitializeButtons()
-        Log.d("startNewGame", "success")
     }
 
     private fun initializeAllKeyboardButtons() {
@@ -251,6 +250,5 @@ class MainActivity : AppCompatActivity() {
             button.isEnabled = savedInstanceState.getBoolean("buttonState$index", true)
             button.setBackgroundColor(if (button.isEnabled) Color.parseColor("#c30010") else Color.parseColor("#8b0000"))
         }
-        Log.v("updateButtonStates", "success")
     }
 }
