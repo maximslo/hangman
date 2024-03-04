@@ -14,16 +14,16 @@
         android:layout_marginStart="58dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="61dp"
-        android:backgroundTint="#42474f"
+        android:backgroundTint="#c30010"
         android:text="@string/newGame"
         android:textSize="26dp"
-        app:cornerRadius="5dp"
+        app:cornerRadius="0dp"
         app:layout_constraintBottom_toTopOf="@+id/hangmanPicture"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/keyboard"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="#000000"
-        app:strokeWidth="1dp" />
+        app:strokeColor="#FFFFFF"
+        app:strokeWidth="0dp" />
 
     <ImageView
         android:id="@+id/hangmanPicture"
@@ -61,7 +61,7 @@
         android:layout_marginEnd="77dp"
         android:layout_marginBottom="3dp"
         android:gravity="center"
-        android:text="CHOOSE A LETTER"
+        android:text="Guess your letter:"
         android:textColor="@color/black"
         android:textSize="34dp"
         app:layout_constraintBottom_toTopOf="@+id/keyboard"
@@ -73,20 +73,20 @@
         android:id="@+id/hintButton"
         android:layout_width="100dp"
         android:layout_height="48dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="10dp"
         android:layout_marginEnd="9dp"
-        android:layout_marginBottom="25dp"
-        android:backgroundTint="#42474f"
+        android:layout_marginBottom="45dp"
+        android:backgroundTint="#c30010"
         android:text="Hint"
         android:textSize="26dp"
-        app:cornerRadius="5dp"
+        app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/hintText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/keyboard"
-        app:strokeColor="#000000"
-        app:strokeWidth="1dp"
-        android:onClick="hintClick"/>
+        app:strokeColor="#FFFFFF"
+        app:strokeWidth="0dp"
+        android:onClick="onHintButtonClick"/>
 
     <TextView
         android:id="@+id/hintText"
@@ -110,7 +110,7 @@
         android:layout_height="261dp"
         android:layout_marginTop="3dp"
         android:layout_marginEnd="8dp"
-        android:background="#96bfff"
+        android:background="#FFFFFF"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/hintButton"
         app:layout_constraintEnd_toStartOf="@+id/hangmanPicture"
@@ -127,78 +127,78 @@
                 android:id="@+id/aButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="A"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/bButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="B"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/cButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="C"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/dButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="D"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/eButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="E"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/fButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="F"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
         </LinearLayout>
 
         <LinearLayout
@@ -210,77 +210,77 @@
                 android:id="@+id/gButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="G"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/hButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="H"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/iButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="I"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/jButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="J"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/kButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="K"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
 
             <com.google.android.material.button.MaterialButton
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="L"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
         </LinearLayout>
 
         <LinearLayout
@@ -292,78 +292,78 @@
                 android:id="@+id/mButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="M"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/nButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="N"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/oButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="O"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/pButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="P"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/qButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="Q"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/rButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="R"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
         </LinearLayout>
 
         <LinearLayout
@@ -375,79 +375,79 @@
                 android:id="@+id/sButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="S"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/tButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="T"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/uButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="U"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/vButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="V"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/wButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:padding="2dp"
                 android:text="W"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/xButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="X"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
         </LinearLayout>
 
         <LinearLayout
@@ -460,26 +460,26 @@
                 android:id="@+id/yButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="Y"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/zButton"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
-                android:backgroundTint="#42474f"
+                android:backgroundTint="#c30010"
                 android:text="Z"
                 android:textSize="18dp"
-                app:cornerRadius="5dp"
-                app:strokeColor="#000000"
-                app:strokeWidth="1dp"
-                android:onClick="letterClick"/>
+                app:cornerRadius="0dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0dp"
+                android:onClick="onLetterButtonClick"/>
         </LinearLayout>
     </LinearLayout>
 

@@ -1,9 +1,7 @@
 package com.example.hangmanhw3
 
-import android.annotation.SuppressLint
-import android.content.res.Configuration
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
+import android.util.Log
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -11,266 +9,262 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var hangmanProgress: ImageView
-    private lateinit var guessingWord: TextView
-    private lateinit var newGameButton: Button
-    private lateinit var currList: List<String>
-    private lateinit var hintText: TextView
-    private lateinit var hintButton: Button
+    private lateinit var gameProgressImage: ImageView
+    private lateinit var wordDisplay: TextView
+    private lateinit var startNewGameButton: Button
+    private lateinit var wordAndHint: List<String>
+    private lateinit var hintDisplayText: TextView
+    private lateinit var showHintButton: Button
 
-    private var currPair: String = ""
-    private var currWord: String = ""
-    private var currHint: String = ""
-    private var numGuesses = 0
-    private var hintState = 0
-    private val guessedLetters = mutableSetOf<Button>()
-    private val allLetters = mutableSetOf<Button>()
+    private var selectedWordAndHint: String = ""
+    private var selectedWord: String = ""
+    private var hintForWord: String = ""
+    private var incorrectGuesses = 0
+    private var hintUsageStatus = 0
+    private val buttonsForGuessedLetters = mutableSetOf<Button>()
+    private val allKeyboardButtons = mutableSetOf<Button>()
+
     companion object {
-        const val GUESSING_WORD_KEY = "GUESSING_WORD_KEY"
+        const val KEY_FOR_CURRENT_WORD = "KEY_FOR_CURRENT_WORD"
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        hangmanProgress = findViewById(R.id.hangmanPicture)
-        guessingWord = findViewById(R.id.guessingWord)
-        currPair = resources.getStringArray(R.array.wordBank).random()
-        currList = currPair.split(",")
-        currWord = currList[0]
-        currHint = currList[1]
-        hintState = 0
-        newGameButton = findViewById(R.id.newGameButton)
-        hintButton = findViewById(R.id.hintButton)
-        hintText = findViewById(R.id.hintText)
+        gameProgressImage = findViewById(R.id.hangmanPicture)
+        wordDisplay = findViewById(R.id.guessingWord)
+        selectedWordAndHint = resources.getStringArray(R.array.wordBank).random()
+        wordAndHint = selectedWordAndHint.split(",")
+        selectedWord = wordAndHint[0]
+        hintForWord = wordAndHint[1]
+        hintUsageStatus = 0
+        startNewGameButton = findViewById(R.id.newGameButton)
+        showHintButton = findViewById(R.id.hintButton)
+        hintDisplayText = findViewById(R.id.hintText)
 
-        newGameButton.setOnClickListener(){
-            newGame()
+        startNewGameButton.setOnClickListener {
+            startNewGame()
         }
 
-        if (savedInstanceState != null) {
-            currWord = savedInstanceState.getString("currWord", "")
-            numGuesses = savedInstanceState.getInt("numGuesses", 0)
-        } else {
-            newGame()
-        }
-        getAllButtons()
+        savedInstanceState?.let {
+            selectedWord = it.getString("selectedWord", "")
+            incorrectGuesses = it.getInt("incorrectGuesses", 0)
+        } ?: startNewGame()
+
+        initializeAllKeyboardButtons()
     }
-    private fun newGame() {
-        hangmanProgress.setImageResource(R.drawable.state0)
-        currPair = resources.getStringArray(R.array.wordBank).random()
-        currList = currPair.split(",")
-        currWord = currList[0]
-        currHint = currList[1]
-        hintState = 0
-        numGuesses = 0
-        hintText.text = "Hint:"
-        newGameButton.isEnabled = true
-        underscoreWord()
-        resetButtons()
+
+    private fun startNewGame() {
+        gameProgressImage.setImageResource(R.drawable.state0)
+        selectedWordAndHint = resources.getStringArray(R.array.wordBank).random()
+        wordAndHint = selectedWordAndHint.split(",")
+        selectedWord = wordAndHint[0]
+        hintForWord = wordAndHint[1]
+        hintUsageStatus = 0
+        incorrectGuesses = 0
+        hintDisplayText.text = "Hint:"
+        startNewGameButton.isEnabled = true
+        displayWordWithUnderscores()
+        reinitializeButtons()
+        Log.d("startNewGame", "success")
     }
-    private fun getAllButtons() {
-        val keyboardGroup: LinearLayout = findViewById(R.id.keyboard)
 
-        for (i in 0 until keyboardGroup.childCount) {
-            val child: View? = keyboardGroup.getChildAt(i)
+    private fun initializeAllKeyboardButtons() {
+        val keyboardLayout: LinearLayout = findViewById(R.id.keyboard)
 
-            if (child is ViewGroup) {
-                for (j in 0 until child.childCount) {
-                    val innerChild: View? = child.getChildAt(j)
-
-                    if (innerChild is Button) {
-                        allLetters.add(innerChild)
+        for (i in 0 until keyboardLayout.childCount) {
+            val row = keyboardLayout.getChildAt(i) as? ViewGroup
+            row?.let {
+                for (j in 0 until it.childCount) {
+                    (it.getChildAt(j) as? Button)?.let { button ->
+                        allKeyboardButtons.add(button)
                     }
                 }
             }
         }
     }
-    private fun disableAll() {
-        val newGame: MaterialButton = findViewById(R.id.newGameButton)
-        newGame.isEnabled = false
-        val keyboardGroup: LinearLayout = findViewById(R.id.keyboard)
-        allLetters.forEach { button ->
+
+    private fun disableAllKeyboardButtons() {
+        startNewGameButton.isEnabled = false
+        allKeyboardButtons.forEach { button ->
             button.isEnabled = false
-            button.setBackgroundColor(Color.parseColor("#c6cfc8"))
+            button.setBackgroundColor(Color.parseColor("#8b0000"))
         }
-    }
-    private fun youLost(view: View) {
-        disableAll()
-        val snackbar = Snackbar.make(view,
-            "You lost :( Click to start a new game",
-            Snackbar.LENGTH_INDEFINITE
-        )
-        snackbar.setAction("New Game") {
-            newGame()
-            snackbar.dismiss()
-        }
-        snackbar.show()
     }
 
-    @SuppressLint("DiscouragedApi")
-    private fun wrongLetter() {
-        numGuesses += 1
-        val curState = "state$numGuesses"
-        val resourceId = resources.getIdentifier(curState, "drawable", packageName)
-        hangmanProgress.setImageResource(resourceId)
-        if(numGuesses > 6) {
-            youLost(findViewById(android.R.id.content))
+    private fun showLoseMessage(view: View) {
+
+        disableAllKeyboardButtons()
+        Snackbar.make(view, "You lost. Start a new game?", Snackbar.LENGTH_INDEFINITE).apply {
+            setAction("New Game") {
+                startNewGame()
+                dismiss()
+            }
+            show()
         }
     }
+
+    private fun processIncorrectGuess() {
+        incorrectGuesses++
+        val drawableState = "state$incorrectGuesses"
+        resources.getIdentifier(drawableState, "drawable", packageName).let {
+            gameProgressImage.setImageResource(it)
+        }
+        if (incorrectGuesses > 6) {
+            showLoseMessage(findViewById(android.R.id.content))
+        }
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString("currWord", currWord)
-        outState.putInt("numGuesses", numGuesses)
-        outState.putString("GUESSING_WORD_KEY", guessingWord.text.toString())
-        outState.putString("currHint", currHint)
-        outState.putInt("hintState", hintState)
-        allLetters.forEachIndexed { index, button ->
-            outState.putBoolean("button$index", button.isEnabled)
+        outState.putString("selectedWord", selectedWord)
+        outState.putInt("incorrectGuesses", incorrectGuesses)
+        outState.putString(KEY_FOR_CURRENT_WORD, wordDisplay.text.toString())
+        outState.putString("hintForWord", hintForWord)
+        outState.putInt("hintUsageStatus", hintUsageStatus)
+        allKeyboardButtons.forEachIndexed { index, button ->
+            outState.putBoolean("buttonState$index", button.isEnabled)
         }
     }
 
-    @SuppressLint("DiscouragedApi")
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        currWord = savedInstanceState.getString("currWord", "")
-        numGuesses = savedInstanceState.getInt("numGuesses", 0)
-        guessingWord.text = savedInstanceState.getString(GUESSING_WORD_KEY, "")
-        currHint = savedInstanceState.getString("currHint", "")
-        hintState = savedInstanceState.getInt("hintState", 0)
-        if(hintState == 0){
-            hintText.text = "Hint:"
-        }
-        else if(hintState == 1 || hintState == 2){
-            hintText.text = currHint
-        }
-        else {
-            hintText.text = "vowel hint!"
-        }
-        val currentState = "state$numGuesses"
-        hangmanProgress.setImageResource(resources.getIdentifier(currentState, "drawable", packageName))
-        allLetters.forEachIndexed { index, button ->
-            button.isEnabled = savedInstanceState.getBoolean("button$index")
-            if (button.isEnabled) {
-                button.setBackgroundColor(Color.parseColor("#42474f"))
-            } else {
-                button.setBackgroundColor(Color.parseColor("#c6cfc8"))
-            }
-        }
-    }
-    private fun underscoreWord() {
-        val stringBuilder = StringBuilder()
-        for (char in currWord) {
-            stringBuilder.append("_ ")
-        }
-        guessingWord.text = stringBuilder.toString()
+        selectedWord = savedInstanceState.getString("selectedWord", "")
+        incorrectGuesses = savedInstanceState.getInt("incorrectGuesses", 0)
+        wordDisplay.text = savedInstanceState.getString(KEY_FOR_CURRENT_WORD, "")
+        hintForWord = savedInstanceState.getString("hintForWord", "")
+        hintUsageStatus = savedInstanceState.getInt("hintUsageStatus", 0)
+        updateHintDisplay()
+        updateHangmanImage()
+        updateButtonStates(savedInstanceState)
     }
 
-    private fun resetButtons() {
-        allLetters.forEach { button ->
+    private fun displayWordWithUnderscores() {
+        wordDisplay.text = selectedWord.map { "_" }.joinToString(" ")
+    }
+
+    private fun reinitializeButtons() {
+        allKeyboardButtons.forEach { button ->
             button.isEnabled = true
-            button.setBackgroundColor(Color.parseColor("#42474f"))
+            button.setBackgroundColor(Color.parseColor("#c30010"))
         }
-        guessedLetters.clear()
+        buttonsForGuessedLetters.clear()
     }
 
-    fun letterClick(view: View) {
-        if (view is Button) {
-            val button = view as Button
-            guessedLetters.add(button)
-            button.setBackgroundColor(Color.parseColor("#c6cfc8"))
+    fun onLetterButtonClick(view: View) {
+        (view as? Button)?.let { button ->
+            buttonsForGuessedLetters.add(button)
+            button.setBackgroundColor(Color.parseColor("#8b0000"))
             button.isEnabled = false
-            val guess = view.text.toString().uppercase().first()
-            if (currWord.contains(guess, ignoreCase = true)) {
-                currWord.forEachIndexed { index, char ->
-                    if (char.equals(guess, ignoreCase = true)) {
-                        updateLetter(index, guess)
+            val guessedLetter = button.text.toString().first().uppercaseChar()
+            if (selectedWord.contains(guessedLetter, ignoreCase = true)) {
+                selectedWord.forEachIndexed { index, char ->
+                    if (char.equals(guessedLetter, ignoreCase = true)) {
+                        revealLetterInWord(index, guessedLetter)
                     }
                 }
             } else {
-                wrongLetter()
+                processIncorrectGuess()
             }
             checkWin()
         }
     }
 
-    private fun updateLetter(index: Int, newChar: Char) {
-        val currentText = StringBuilder(guessingWord.text.toString())
-        currentText.setCharAt(index*2, newChar)
-        guessingWord.text = currentText.toString()
+    private fun revealLetterInWord(index: Int, letter: Char) {
+        val currentDisplay = StringBuilder(wordDisplay.text.toString())
+        currentDisplay[index * 2] = letter
+        wordDisplay.text = currentDisplay.toString()
     }
 
-    private fun checkWin(){
-        val trimmedWord = guessingWord.text.toString().replace(" ", "")
-        if(trimmedWord.equals(currWord, ignoreCase = true)){
-            disableAll()
-            val snackbar = Snackbar.make(findViewById(android.R.id.content), "You Won! Click to start a new game :)", Snackbar.LENGTH_INDEFINITE)
+    private fun checkWin() {
+        val trimmedWord = wordDisplay.text.toString().replace(" ", "")
+        if (trimmedWord.equals(selectedWord, ignoreCase = true)) {
+            disableAllKeyboardButtons()
+            val snackbar = Snackbar.make(findViewById(android.R.id.content), "Nice win! Start a new game?", Snackbar.LENGTH_INDEFINITE)
             snackbar.setAction("New Game") {
-                newGame()
+                startNewGame()
                 snackbar.dismiss()
             }
             snackbar.show()
         }
     }
 
-    fun hintClick(view: View) {
-        if (numGuesses == 6 && hintState >= 1) {
-            val snackbar = Snackbar.make(view,
-                "Hint not available",
-                Snackbar.LENGTH_LONG)
+
+    /*private fun checkWin(){
+        val trimmedWord = guessingWord.text.toString().replace(" ", "")
+        if(trimmedWord.equals(currWord, ignoreCase = true)){
+            disableAll()
+            val snackbar = Snackbar.make(findViewById(android.R.id.content), "Nice win! Start a new game?", Snackbar.LENGTH_INDEFINITE)
+            snackbar.setAction("New Game") {
+                newGame()
+                snackbar.dismiss()
+            }
             snackbar.show()
         }
-        else{
-            if(hintState == 0){
-                hintText.append(currHint)
+    }*/
+
+    fun onHintButtonClick(view: View) {
+        if (incorrectGuesses == 6 && hintUsageStatus >= 1) {
+            Snackbar.make(view, "No hints available", Snackbar.LENGTH_LONG).show()
+        } else {
+            when (hintUsageStatus) {
+                0 -> hintDisplayText.append(hintForWord)
+                1 -> disableHalfOfTheLetters()
+                2 -> provideVowelHint()
             }
-            else if(hintState == 1)
-                disableHalf()
-            else if(hintState == 2){
-                vowelHint()
-            }
-            hintState += 1
+            hintUsageStatus++
         }
     }
 
-    private fun vowelHint() {
-        wrongLetter() //costs the player a turn
-        val vowels = setOf('A', 'E', 'I', 'O', 'U')
-        for ((index, char) in currWord.withIndex()) {
-            if (char.uppercaseChar() in vowels && guessingWord.text.toString()[index*2] == '_') {
-                updateLetter(index, char.uppercaseChar())
+    private fun provideVowelHint() {
+        processIncorrectGuess()
+        val vowels = listOf('A', 'E', 'I', 'O', 'U')
+        selectedWord.withIndex().forEach { (index, char) ->
+            if (char.uppercaseChar() in vowels && wordDisplay.text[index * 2] == '_') {
+                revealLetterInWord(index, char.uppercaseChar())
             }
         }
         checkWin()
-        hintText.text = "vowel hint!"
+        hintDisplayText.text = "Vowel hint provided!"
     }
 
-    private fun disableHalf() {
-        wrongLetter()
-        val lettersNotInWord = notInWord()
-        val lettersToDisable = randomSet(lettersNotInWord)
+    private fun disableHalfOfTheLetters() {
+        processIncorrectGuess()
+        val lettersNotInSelectedWord = ('A'..'Z').toSet() - selectedWord.uppercase().toSet()
+        val lettersToDisable = lettersNotInSelectedWord.shuffled().take(lettersNotInSelectedWord.size / 2).toSet()
 
-        allLetters.forEach { button ->
-            val char = button.text.toString().uppercase().first()
-            if (char in lettersToDisable) {
+        allKeyboardButtons.forEach { button ->
+            if (button.text.toString().uppercase().first() in lettersToDisable) {
                 button.isEnabled = false
-                button.setBackgroundColor(Color.parseColor("#c6cfc8"))
+                button.setBackgroundColor(Color.parseColor("#8b0000"))
             }
         }
     }
 
-    private fun notInWord(): Set<Char> {
-        val wordLetters = currWord.uppercase().toSet()
-        return ('A'..'Z').toSet() - wordLetters
+    private fun updateHintDisplay() {
+        hintDisplayText.text = when (hintUsageStatus) {
+            0 -> "Hint:"
+            1, 2 -> hintForWord
+            else -> "Vowel hint provided!"
+        }
     }
 
-    private fun randomSet(letters: Set<Char>): Set<Char> {
-        val list = letters.toList()
-        val halfSize = list.size / 2
-        return list.shuffled().take(halfSize).toSet()
+    private fun updateHangmanImage() {
+        val currentStateDrawable = "state$incorrectGuesses"
+        gameProgressImage.setImageResource(resources.getIdentifier(currentStateDrawable, "drawable", packageName))
     }
 
+    private fun updateButtonStates(savedInstanceState: Bundle) {
+        allKeyboardButtons.forEachIndexed { index, button ->
+            button.isEnabled = savedInstanceState.getBoolean("buttonState$index", true)
+            button.setBackgroundColor(if (button.isEnabled) Color.parseColor("#c30010") else Color.parseColor("#8b0000"))
+        }
+        Log.v("updateButtonStates", "success")
+    }
 }
